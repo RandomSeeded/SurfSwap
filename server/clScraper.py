@@ -3,9 +3,6 @@
 from lxml import html
 import requests
 from flask.ext.sqlalchemy import SQLAlchemy
-import server
-
-# server.import_test()
 
 regions = [ 
     'bakersfield',
@@ -73,9 +70,6 @@ def generate_listings(region):
 for i in range(0, len(regions)):
     listings = generate_listings(regions[i])
     # print(listings)
-
-
-
 
 
 
