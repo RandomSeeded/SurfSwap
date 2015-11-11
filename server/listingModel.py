@@ -3,24 +3,24 @@ import requests
 from lxml import html
 
 class Listing(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.String(20), primary_key=True)
     href = db.Column(db.String(80), unique=False)
     text = db.Column(db.String(128), unique=False)
     price = db.Column(db.String(10), unique=False)
 
-    def __init__(self, id, href, text, price):
-        self.id = id
+    def __init__(self, listing_id, href, text, price):
+        self.id = listing_id
         self.href = href
         self.text = text
         self.price = price
     def __repr__(self):
-        return str(self.id) + ": "+ self.href + " - " + self.text + " - " + str(self.price)
+        return self.id + ": "+ self.href + " - " + self.text + " - " + str(self.price)
 
 def generate_listings(region):
     page = requests.get('http://' + region + '.craigslist.org/search/spo?sort=rel&query=surfboards')
 
     if page.status_code != 200:
-        print('something went wrong')
+        print('Something went wrong')
 
     else:
         # This version looks at the rows
@@ -41,8 +41,10 @@ def generate_listings(region):
             listings.append(listing)
 
             # Adds to database if not already stored
-            alreadyListed = db.session.query(Listing).get(listing_id)
-            if (alreadyListed == None):
+            #alreadyListed = db.session.query(Listing).get(listing_id)
+            alreadyListed = db.session.query(Listing).filter(Listing.id == listing_id).all()
+            #if (alreadyListed == None):
+            if len(alreadyListed) == 0:
                 db.session.add(listing)
                 db.session.commit()
         

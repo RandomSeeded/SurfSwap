@@ -3,7 +3,7 @@ import listingModel
 
 # Model for storing our training data (may need addl fields)
 class Item(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.String(20), primary_key=True)
     href = db.Column(db.String(80), unique=False)
     text = db.Column(db.String(128), unique=False)
     price = db.Column(db.String(10), unique=False)
@@ -19,9 +19,7 @@ class Item(db.Model):
 db.create_all()
 
 listings = listingModel.Listing.query.all()
-for i in range(0, 0):
-# for i in range(0, len(listings)):
-    #print('hi')
+for i in range(0, len(listings)):
     listing = listings[i]
     item = db.session.query(Item).get(listing.id)
     if item == None:
