@@ -41,11 +41,12 @@ def generate_listings(region):
             listings.append(listing)
 
             # Adds to database if not already stored
-            #alreadyListed = db.session.query(Listing).get(listing_id)
             alreadyListed = db.session.query(Listing).filter(Listing.id == listing_id).all()
-            #if (alreadyListed == None):
             if len(alreadyListed) == 0:
                 db.session.add(listing)
                 db.session.commit()
         
         return listings
+
+
+

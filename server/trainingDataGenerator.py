@@ -34,5 +34,4 @@ for i in range(0, len(listings)):
 
 print(Item.query.all())
 
-# print(listingModel.Listing.query.all())
 

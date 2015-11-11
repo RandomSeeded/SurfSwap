@@ -1,4 +1,5 @@
 # Swap files
 *.swp
 */__pycache__/
+*.pyc
 
