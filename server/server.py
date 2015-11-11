@@ -9,10 +9,6 @@ db = SQLAlchemy(app)
 def hello():
     return "Hello World!"
 
-# This code was to check the syntax on referencing functions defined here in another file
-# def import_test():
-#     print('hi')
-
 if __name__ == "__main__":
     app.run()
 

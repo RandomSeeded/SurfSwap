@@ -46,6 +46,7 @@ class Listing:
 
 def generate_listings(region):
     page = requests.get('http://' + region + '.craigslist.org/search/spo?sort=rel&query=surfboards')
+
     if page.status_code != 200:
         print('something went wrong')
 
